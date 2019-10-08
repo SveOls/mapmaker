@@ -1,8 +1,9 @@
 use bmp::{Image, Pixel};
+mod tests;
 
 fn main() {
-    let img: Image; 
-    match bmp::open("input/provinces.bmp") {
+    let img: Image;
+    match open_file("provinces".to_string()) {
         Ok(i) => img = i,
         Err(e) => { println!("Error: {}", e); return; },
     };
@@ -62,4 +63,10 @@ fn main() {
     }
     let _ = sea.save("sea.bmp");
     let _ = prov.save("prov.bmp");
+}
+
+
+fn open_file(filename: String) -> bmp::BmpResult<Image> 
+{
+    bmp::open(format!("input/{}.bmp", filename))
 }
